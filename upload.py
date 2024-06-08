@@ -26,11 +26,10 @@ input_directory = os.environ['INPUT_DIRECTORY']
 # Recursively upload files to S3
 for root, dirs, files in os.walk(input_directory):
     for file in files:
-        #timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        #print(timestamp, ': Uploading ' + file)
+        timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(timestamp, ': Uploading ' + file)
         local_path = os.path.join(root, file)
         s3_path = os.path.relpath(local_path, input_directory)
-        print(s3_path)
-        #s3.upload_file(local_path, destination_bucket_name, s3_path)
-        #timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        #print(timestamp, ':', file, 'transferred')
+        s3.upload_file(local_path, destination_bucket_name, s3_path)
+        timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(timestamp, ':', file, 'transferred')
